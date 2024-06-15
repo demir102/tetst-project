@@ -1,0 +1,153 @@
+bot.api.setMyCommands([
+  { command: "start", description: "Start the bot" },
+  { command: "list", description: "shows the database" },
+  { command: "add", description: "adds a note" },
+  { command: "delete", description: "deletes a note" },
+]);
+
+bot.command("start", (ctx) => ctx.reply("дабро пожаловать что вы хотите сделать"));
+
+getfiledatabase();
+
+
+let filedatabase;
+let numberindicator;
+let masnumberindicator = [];
+let masdatabase;
+let indicatornumber;
+let flag = 0;
+
+async function getfiledatabase(){ 
+
+filedatabase = await fs.readFile('./test/database',{encoding: "utf-8"});
+masdatabase = filedatabase;
+masdatabase = masdatabase.split("\n");
+
+}
+
+bot.command("list", async (ctx) =>{ 
+getfiledatabase();
+indicator();
+if(filedatabase){ 
+for(let i = 0; i < masdatabase.length - 1; i++){
+  const inlineKeyboard = new InlineKeyboard()
+  console.log(indicatornumber[i])
+    .text("delete", "D_" + masnumberindicator[i] ) 
+    .text("edit", "E_" + masnumberindicator[i])
+
+ await ctx.reply(`ваша заметка ${masdatabase[i]}`,{
+    reply_markup: inlineKeyboard 
+  });
+}
+}
+
+});
+
+ bot.on("callback_query:data", async (ctx) => {
+  getfiledatabase();
+    indicatornumber = ctx.callbackQuery.data;
+    indicatornumber = indicatornumber.split("_");
+    console.log(indicatornumber)
+    let masdelete = filedatabase;
+    masdelete = masdelete.split("\n");
+  if(indicatornumber[0] == "D"){
+    flag = 2;
+   for(let i = 0; i < masdelete.length - 1; i++){
+      let a = masdelete[i].split(":");
+     console.log(indicatornumber[1], a[0]);\n
+       if(indicatornumber[1] == a[0]){
+          masdelete.splice(i, 1);
+          fs.writeFile("./test/database", "")
+        }
+      }
+  //      if(flag == 2){
+  //        for(let i = 0; i < masdelete.length - 1; i++)
+  //          fs.appendFile("./test/database", masdelete[i] + "\n");
+  //           ctx.reply("ok");
+  //           flag = 0;
+  // }
+     }
+      if(indicatornumber[0] == "E"){
+       flag = 4
+       ctx.reply("впишите свое редоктирование.")
+//     //   for(let i = 0; i < masdelete.length - 1; i++){
+//     //      let a = masdelete[i].split(":");
+//     //       const text = ctx.msg.text;
+//     //       if(indicatornumber[1] == a[0]){
+//     //         masdelete.splice(i, 0, indicatornumber+":" + text);
+//     //         fs.writeFile("./test/database", "")
+//     //         flag = 2;
+            }
+//     //       }
+//     //      if(flag == 2){
+//     //        for(let i = 0; i < masdelete.length - 1; i++)
+//     //          fs.appendFile("./test/database", masdelete[i] + "\n");
+//     //           ctx.reply("ok");
+//     //           flag = 0;
+//     //      }
+//     //     }
+         });
+
+
+bot.command("add", (ctx) => ctx.reply("запишите вашу заметку ", flag = 1))
+
+function indicator(){
+  getfiledatabase();
+  if(masdatabase == ''){
+    numberindicator = 1;
+  }
+  else{
+    getfiledatabase();
+    let id;
+    id = masdatabase.length;
+    id = masdatabase[id - 2];
+    id = id.split(":");
+    numberindicator = Number(id[0]) + 1;
+    console.log(id);
+}
+}
+ 
+bot.on("message:text", async (ctx) => {
+const text = ctx.msg.text;
+if(flag == 1){
+indicator(); 
+fs.appendFile("./test/database/", `${numberindicator}: ${text} `)
+ctx.reply("ok");
+ flag = 0;
+getfiledatabase();
+}
+// if(flag == 2){
+//   for(let i = 0; i < masdatabase.length - 1; i++){
+//     let a = masdatabase[i].split(":");
+
+//      if(indicatornumber[1] == a[0]){
+//         masdatabase.splice(i, 1);
+//         fs.writeFile("./test/database", "")
+//         flag = 3;
+//      }
+// }
+// if(flag == 3)
+//   for(let i = 0; i < masdatabase.length - 1; i++)
+//     fs.appendFile("./test/database", masdatabase[i] + "\n");
+//      ctx.reply("ok");
+//      flag = 0;
+// }
+if(flag == 4){
+  for(let i = 0; i < masdatabase.length - 1; i++){
+    let a = masdatabase[i].split(":");
+     const text = ctx.msg.text;
+     if(indicatornumber[1] == a[0]){
+       masdatabase.splice(i, 0, indicatornumber+ ":" + text);
+       fs.writeFile("./test/database", "")
+       flag = 5;
+}
+if(flag == 5){
+  for(let i = 0; i < masdatabase.length - 1; i++)
+    fs.appendFile("./test/database", masd[i] + "\n");
+     ctx.reply("ok");
+     flag = 0;
+}
+}
+}
+})
+

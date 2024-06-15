@@ -1,0 +1,16 @@
+{
+  "name": "",
+  "version": "1.0.program_bot0",
+  "description": "notes",
+  "main": "App.js",
+  "main2": "Notes.js",
+  "type": "module",
+  "scripts": {
+    "notes.js": "node Notes.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "grammy": "^1.22.4"
+  }
+}

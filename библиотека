@@ -1,0 +1,84 @@
+// console.log('hello world')
+
+// async function listdir(){
+//     try{
+//         let result = await fs.readdir('test')
+//         console.log(result);
+//     } catch(err){
+//         console.error('error')
+//     }
+// }
+
+// listdir();
+
+// function result(res){
+//     console.log(res);
+// }
+// function err(e){
+//     console.log(e);
+// }
+
+
+// fs.readdir("./").then(result,err);
+
+// fs.readFile('./package.json',{encoding: 'utf8'})
+// .then((contend) => (
+//     console.log(contend)
+// ));
+
+//   fs.writeFile('./test/test3' , 'test')
+
+
+//  fs.mkdir("./test2"); 
+
+// fs.rename("./test2","test1")
+
+//  fs.rmdir("./test2")
+
+//  fs.unlink("./test2");
+
+// fs.rename("./test/cdf.js","./test/cfd.js")
+
+
+
+// indicatornumber = ctx.callbackQuery.data;
+// indicatornumber = indicatornumber.split("_");
+//  await getfiledatabase();
+// let masdelete = filedatabase;
+// masdelete = masdelete.split("\n");
+// if(indicatornumber[0] == "D"){
+// for(let i = 0; i < masdelete.length - 1; i++){
+//   let a = masdelete[i].split(":");
+ 
+//    if(indicatornumber[1] == a[0]){
+//       masdelete.splice(i, 1);
+//       fs.writeFile("./test/database", "")
+//       flag = 2;
+//     }
+//    }
+//    if(flag == 2){
+//      for(let i = 0; i < masdelete.length - 1; i++)
+//        fs.appendFile("./test/database", masdelete[i] + "\n");
+//         ctx.reply("ok");
+//         flag = 0;
+//    }
+//  }
+//   if(indicatornumber[0] == "E"){
+//    flag = 3
+//    ctx.reply("впишите свое редоктирование.")
+ //   for(let i = 0; i < masdelete.length - 1; i++){
+ //      let a = masdelete[i].split(":");
+ //       const text = ctx.msg.text;
+ //       if(indicatornumber[1] == a[0]){
+ //         masdelete.splice(i, 0, indicatornumber+":" + text);
+ //         fs.writeFile("./test/database", "")
+ //         flag = 2;
+        // }
+ //       }
+ //      if(flag == 2){
+ //        for(let i = 0; i < masdelete.length - 1; i++)
+ //          fs.appendFile("./test/database", masdelete[i] + "\n");
+ //           ctx.reply("ok");
+ //           flag = 0;
+ //      }
+ //     }
